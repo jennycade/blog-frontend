@@ -1,25 +1,21 @@
 import './App.css';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// routing
+import { Link, Outlet } from 'react-router-dom';
 
+// components
 import Menu from './components/Menu';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Menu />
-        <Routes>
-          <Route path='/' exact>
-            <p>Home placeholder  </p>
-          </Route>
-          <Route path='/posts'>
-            <p>Posts placeholder</p>
-          </Route>
-        </Routes>
-      </div>
-    </Router>
-    
+    <div className="App">
+      <menu>
+        <Link to="/">Home</Link>
+        <Link to="/posts">Posts</Link>
+      </menu>
+
+      <Outlet />
+    </div>
   );
 }
 

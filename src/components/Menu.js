@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
+
 const Menu = (props) => {
   return (
     <menu>
-      Menu placeholder
+      <Link to="/">Home</Link>
+      <Link to="/posts">Posts</Link>
     </menu>
   );
 }
