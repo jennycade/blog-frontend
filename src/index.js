@@ -3,32 +3,14 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 // routes
-import Home from './routes/home';
-import Posts from './routes/posts';
-import SignIn from './routes/signin';
-
-// components
+import MainRoutes from './MainRoutes';
 import App from './App';
 
 ReactDOM.render(
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App />}>
-          <Route path='signin' element={<SignIn />} />
-
-          <Route path='home' element={<Home />} />
-          <Route path='posts' element={<Posts />} />
-          
-
-          <Route path='*' element={
-            <main><p>404 not found</p></main>
-          } />
-        </Route>
-      </Routes>
-    </BrowserRouter>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

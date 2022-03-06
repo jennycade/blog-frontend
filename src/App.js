@@ -4,10 +4,16 @@ import './App.css';
 import { useState } from 'react';
 
 // routing
-import { Link, Outlet } from 'react-router-dom';
+import {
+  BrowserRouter, Routes, Route,
+  Link, Outlet
+} from 'react-router-dom';
 
 // components
 import Menu from './components/Menu';
+import SignIn from './routes/signin';
+import Home from './routes/home';
+import Posts from './routes/posts'
 
 function App() {
   // state
@@ -43,14 +49,31 @@ function App() {
       <menu>
         <Link to="/">Home</Link>
         <Link to="/posts">Posts</Link>
-        <Link to='/signin'
-          handleSigninSubmit={handleSigninSubmit}
-        >Sign in</Link>
+        <Link to='/signin'>Sign in</Link>
       </menu>
 
-      <Outlet />
+      <BrowserRouter>
+        <Routes>
+          
+            <Route path='signin' element={
+              <SignIn
+                handleSigninSubmit
+              />
+            } />
+
+            <Route path='home' element={<Home />} />
+            <Route path='posts' element={<Posts />} />
+            
+
+            <Route path='*' element={
+              <main><p>404 not found</p></main>
+            } />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+
+
