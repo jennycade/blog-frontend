@@ -69,8 +69,23 @@ function App() {
     });
   }
 
-  // posts
-
+  // get all posts
+  const getPosts = async () => {
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/posts`,
+      {
+        headers: {
+          'Authorization': `Bearer: ${token}`
+        }
+      }
+    ).then(response => handleResponse(response))
+    .then(data => {
+      return data;
+    })
+    .catch( (err) => {
+      console.error(err);
+    });
+  }
 
   return (
     <div className="App">
@@ -88,7 +103,7 @@ function App() {
         } />
 
         <Route path='home' element={<Home />} />
-        <Route path='posts' element={<Posts />} />
+        <Route path='posts' element={<Posts getPosts={getPosts} />} />
         
 
         <Route path='*' element={
