@@ -22,6 +22,16 @@ function App() {
   // routing
   const navigate = useNavigate();
 
+  // error handling
+  const handleResponse = (response) => {
+    if (!response.ok) {
+      const err = new Error(response.error);
+      err.status = response.status;
+      throw err;
+    }
+    return response.json();
+  }
+
   // first load -> get token from localStorage
   // TODO
 
@@ -47,14 +57,7 @@ function App() {
         },
         body: JSON.stringify({ username, password })
       }
-    ).then(response => {
-      if (!response.ok) {
-        const err = new Error(response.error);
-        err.status = response.status;
-        throw err;
-      }
-      return response.json();
-    })
+    ).then(response => handleResponse(response))
     .then(data => {
       saveToken(data.token);
       // redirect
@@ -65,6 +68,9 @@ function App() {
       console.error(error);
     });
   }
+
+  // posts
+
 
   return (
     <div className="App">
