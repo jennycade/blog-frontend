@@ -5,12 +5,12 @@ import { useState } from 'react';
 
 // routing
 import {
-  BrowserRouter, Routes, Route,
-  Link, Outlet
+  Routes, Route,
+  Link,
+  useNavigate,
 } from 'react-router-dom';
 
 // components
-import Menu from './components/Menu';
 import SignIn from './routes/signin';
 import Home from './routes/home';
 import Posts from './routes/posts'
@@ -19,17 +19,20 @@ function App() {
   // state
   const [token, setToken] = useState('');
 
+  // routing
+  const navigate = useNavigate();
+
   // first load -> get token from localStorage
   // TODO
 
   const saveToken = (token) => {
-    // TODO
     // save in localStorage
+    localStorage.setItem('token', token);
     // set state
     setToken(token);
   }
   const destroyToken = (token) => {
-    // TODO
+    localStorage.removeItem('token');
   }
 
   const handleSigninSubmit = async (username, password) => {
@@ -54,10 +57,13 @@ function App() {
     })
     .then(data => {
       saveToken(data.token);
+      // redirect
+      navigate(`/`);
     })
     .catch( (error) => {
+      // TODO: Catch sign in errors
       console.error(error);
-    })
+    });
   }
 
   return (
