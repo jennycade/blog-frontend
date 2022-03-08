@@ -6,10 +6,10 @@ const Post = (props) => {
   const { post } = props;
 
   return (
-    <article>
+    <article className='post'>
       <header>
         <h1>{post.title}</h1>
-        <div>
+        <div className='byline'>
           <a rel="author" href={`/users/${post.author._id}`}>{post.author.displayName}</a>
           <Time time={post.createdAt} />
           {
@@ -19,6 +19,9 @@ const Post = (props) => {
         </div>
       </header>
       <main>{post.text}</main>
+      <footer>
+        {/* comments */}
+      </footer>
     </article>
   );
 }

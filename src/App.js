@@ -48,6 +48,7 @@ function App() {
   }
   const destroyToken = (token) => {
     localStorage.removeItem('token');
+    setToken('');
   }
 
   const handleSigninSubmit = async (username, password) => {
@@ -98,7 +99,14 @@ function App() {
       <menu>
         <Link to="/home">Home</Link>
         <Link to="/posts">Posts</Link>
-        <Link to='/signin'>Sign in</Link>
+        { !!token ?
+          <button onClick={destroyToken}>
+            Sign out
+          </button>
+          :
+          <Link to='/signin'>Sign in</Link>
+        }
+        
       </menu>
 
       <Routes>

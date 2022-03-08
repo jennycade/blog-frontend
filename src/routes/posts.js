@@ -26,7 +26,7 @@ const Posts = (props) => {
   );
 
   return (
-    <section>
+    <main className='posts'>
       { posts.length > 0 &&
       posts.map(post => {
         return (
@@ -39,7 +39,7 @@ const Posts = (props) => {
       { posts.length === 0 &&
         <p>No posts to display</p>
       }
-    </section>
+    </main>
   );
 };
 
