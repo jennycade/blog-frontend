@@ -97,8 +97,7 @@ function App() {
   return (
     <div className="App">
       <menu>
-        <Link to="/home">Home</Link>
-        <Link to="/posts">Posts</Link>
+        <Link to="/">All posts</Link>
         { !!token ?
           <button onClick={destroyToken}>
             Sign out
@@ -116,8 +115,7 @@ function App() {
           />
         } />
 
-        <Route path='home' element={<Home />} />
-        <Route path='posts' element={<Posts getPosts={getPosts} />} />
+        <Route index element={<Posts getPosts={getPosts} />} />
         
 
         <Route path='*' element={
