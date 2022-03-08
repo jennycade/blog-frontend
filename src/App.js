@@ -23,13 +23,13 @@ function App() {
   const navigate = useNavigate();
 
   // error handling
-  const handleResponse = (response) => {
+  const handleResponse = async (response) => {
     if (!response.ok) {
       const err = new Error(response.error);
       err.status = response.status;
       throw err;
     }
-    return response.json();
+    return await response.json();
   }
 
   // first load -> get token from localStorage
@@ -76,20 +76,21 @@ function App() {
 
   // get all posts
   const getPosts = async () => {
-    fetch(
+    const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URI}/posts`,
       {
         headers: {
           'Authorization': `Bearer: ${token}`
         }
       }
-    ).then(response => handleResponse(response))
-    .then(data => {
-      return data;
-    })
-    .catch( (err) => {
-      console.error(err);
-    });
+    )
+    if (!response.ok) {
+      const err = new Error(response.error);
+      err.status = response.status;
+      throw err;
+    }
+    const json = await response.json();
+    return json;
   }
 
   return (
