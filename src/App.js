@@ -12,7 +12,6 @@ import {
 
 // components
 import SignIn from './routes/signin';
-import Home from './routes/home';
 import Posts from './routes/posts'
 
 function App() {
