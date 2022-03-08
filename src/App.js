@@ -1,7 +1,7 @@
 import './App.css';
 
 // react
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // routing
 import {
@@ -33,7 +33,12 @@ function App() {
   }
 
   // first load -> get token from localStorage
-  // TODO
+  useEffect(() => {
+    const localToken = localStorage.getItem('token');
+    if (localToken && localToken !== token) {
+      setToken(localToken);
+    }
+  }, [token]);
 
   const saveToken = (token) => {
     // save in localStorage

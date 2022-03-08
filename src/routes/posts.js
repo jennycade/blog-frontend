@@ -11,15 +11,21 @@ const Posts = (props) => {
   // get posts on load
   useEffect(
     () => {
-      setPosts(getPosts());
-      // TODO: Fix this! getPosts() is async
+      const fetchData = async () => {
+        const newPosts = await getPosts();
+        setPosts(newPosts);
+      }
+      
+      fetchData()
+        .catch(console.error);
     },
     [getPosts]
   );
 
   return (
     <section>
-      {posts.map(post => {
+      { posts.length > 0 &&
+      posts.map(post => {
         return (<article key={post._id}>POST</article>);
       })}
     </section>
