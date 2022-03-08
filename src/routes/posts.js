@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 // components
-import Time from '../components/Time';
+import Post from '../components/Post';
 
 const Posts = (props) => {
   // props
@@ -30,18 +30,15 @@ const Posts = (props) => {
       { posts.length > 0 &&
       posts.map(post => {
         return (
-        <article key={post._id}>
-          <header>
-            <h1>{post.title}</h1>
-            <div class="byline">
-              <a rel="author" href={`/users/${post.author._id}`}>{post.author.displayName}</a>
-              <Time time={post.createdAt} />
-            </div>
-          </header>
-          <main>{post.text}</main>
-        </article>
+          <Post
+            key={post._id}
+            post={post}
+          />
         );
       })}
+      { posts.length === 0 &&
+        <p>No posts to display</p>
+      }
     </section>
   );
 };

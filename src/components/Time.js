@@ -13,7 +13,7 @@ const Time = (props) => {
   const formattedTime = new Date(time).toLocaleDateString(undefined, formatOptions);
 
   return (
-    <time pubdate datetime={time}>
+    <time dateTime={time}>
       {formattedTime}  
     </time>
   );
