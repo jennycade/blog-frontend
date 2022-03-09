@@ -33,6 +33,7 @@ const Posts = (props) => {
           <Post
             key={post._id}
             post={post}
+            commentsDisplay='count'
           />
         );
       })}
