@@ -32,23 +32,28 @@ function App() {
     return await response.json();
   }
 
-  // first load -> get token from localStorage
+  // first load -> get token and user from localStorage
   useEffect(() => {
     const localToken = localStorage.getItem('token');
     if (localToken && localToken !== token) {
       setToken(localToken);
+      setUser(JSON.parse(localStorage.getItem('user')));
     }
   }, [token]);
 
-  const saveToken = (token) => {
+  const saveAuth = (token, user) => {
     // save in localStorage
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     // set state
     setToken(token);
+    setUser(user);
   }
-  const destroyToken = (token) => {
+  const destroyToken = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setToken('');
+    setUser({});
   }
   const getHeaders = () => {
     const result = new Headers({
@@ -72,8 +77,8 @@ function App() {
       }
     ).then(response => handleResponse(response))
     .then(data => {
-      saveToken(data.token);
-      setUser(data.user);
+      saveAuth(data.token, data.user);
+      
       // redirect
       navigate(`/`);
     })
