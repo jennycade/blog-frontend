@@ -28,6 +28,7 @@ const Posts = (props) => {
 
   return (
     <main className='posts'>
+      <h1>All posts</h1>
       { posts.length > 0 &&
       posts.map(post => {
         return (

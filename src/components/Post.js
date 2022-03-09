@@ -1,8 +1,9 @@
 // routing
 import { Link } from 'react-router-dom';
+import Byline from './Byline';
+import CommentsSection from './CommentsSection';
 
 // components
-import Time from './Time';
 
 const Post = (props) => {
   // props
@@ -12,14 +13,12 @@ const Post = (props) => {
     <article className='post'>
       <header>
         <Link to={`/posts/${post._id}`}><h1>{post.title}</h1></Link>
-        <div className='byline'>
-          <a rel="author" href={`/users/${post.author._id}`}>{post.author.displayName}</a>
-          <Time time={post.createdAt} />
+        <Byline article={post}>
           {
             post.postStatus === 'draft' &&
             <small className='badge draft-badge'>draft</small>
           }
-        </div>
+        </Byline>
       </header>
       <main>{post.text}</main>
       <footer>
@@ -27,7 +26,7 @@ const Post = (props) => {
           <p>{post.comments.length} comments</p>
         }
         { commentsDisplay === 'full' &&
-          <p>COMMENTS PLACEHOLDER</p>
+          <CommentsSection comments={post.comments} />
         }
       </footer>
     </article>

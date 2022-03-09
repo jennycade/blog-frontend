@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 // components
 import Post from '../components/Post';
+import Loading from '../components/Loading';
 
 const SinglePost = (props) => {
   // props
@@ -28,8 +29,10 @@ const SinglePost = (props) => {
 
   return (
     <>
-      { Object.keys(post).length !== 0 &&
+      { Object.keys(post).length !== 0 ?
         <Post post={post} commentsDisplay='full' />
+        :
+        <Loading />
       }
       {/* TODO: add loading indicator */}
     </>
