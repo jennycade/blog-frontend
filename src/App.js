@@ -15,6 +15,7 @@ import {
 import SignIn from './routes/signin';
 import Posts from './routes/posts'
 import SinglePost from './routes/singlePost';
+import User from './components/User';
 
 function App() {
   // state
@@ -120,6 +121,21 @@ function App() {
     return json;
   }
 
+  // get one user
+  const getUser = async (userId) => {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/users/${userId}`,
+      { headers: getHeaders(), }
+    )
+    if (!response.ok) {
+      const err = new Error(response.error);
+      err.status = response.status;
+      throw err;
+    }
+    const json = await response.json();
+    return json;
+  }
+
   return (
     <div className="App">
       <menu>
@@ -149,10 +165,16 @@ function App() {
           />
         } />
 
+        {/* index - posts */}
         <Route index element={<Posts getPosts={getPosts} />} />
+        
+        {/* posts */}
         <Route path='posts' element={<><Outlet /></> }>
           <Route index element={<Posts getPosts={getPosts} /> } />
           <Route path=':postId' element={<SinglePost getPost={getPost} />} />
+        </Route>
+        <Route path='users' element={<><Outlet /></>} >
+          <Route path=':userId' element={<User getUser={getUser} />} />
         </Route>
         
 

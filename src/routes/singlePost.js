@@ -28,14 +28,14 @@ const SinglePost = (props) => {
   }, [getPost, postId]);
 
   return (
-    <>
+    <main>
       { Object.keys(post).length !== 0 ?
         <Post post={post} commentsDisplay='full' />
         :
         <Loading />
       }
       {/* TODO: add loading indicator */}
-    </>
+    </main>
   );
 };
 

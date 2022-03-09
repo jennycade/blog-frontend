@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 menu {
@@ -7,12 +7,13 @@ menu {
   justify-content: space-around;
   align-items: baseline;
 }
+.App main {
+  padding: 0 2rem;
+}
 
 article {
   padding-top: 2rem;
   padding-bottom: 2rem;
-  padding-right: 4rem;
-  padding-left: 4rem;
 
   text-align: left;
 
@@ -27,20 +28,32 @@ article:last-child {
 }
 
 
-.post header .byline {
+.byline {
   color: rgb(88, 88, 88);
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.8rem;
 }
 .badge {
   border-radius: 3px;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding: 0.2rem 0.5rem;
 }
 .draft-badge {
   background-color: rgb(88, 88, 88);
   color: white;
+}
+.badge-role {
+  color: white;
+}
+.badge-role-admin {
+  background-color: rgb(100, 9, 9);
+}
+.badge-role-author {
+  background-color: rgb(194, 139, 19);
+}
+.badge-role-commenter {
+  background-color: rgb(3, 129, 187);
 }
 .post h1 {
   margin: 0;
