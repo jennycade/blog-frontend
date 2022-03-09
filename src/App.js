@@ -49,7 +49,7 @@ function App() {
     setToken(token);
     setUser(user);
   }
-  const destroyToken = () => {
+  const destroyAuthData = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setToken('');
@@ -109,8 +109,8 @@ function App() {
         <Link to="/">All posts</Link>
         { !!token ?
           <>
-            <p>Welcome {user.displayName}</p>
-            <button onClick={destroyToken}>
+            <Link to={`/users/${user._id}`}>{user.displayName}</Link>
+            <button onClick={destroyAuthData}>
               Sign out
             </button>
           </>

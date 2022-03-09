@@ -28,9 +28,17 @@ article:last-child {
 
 
 .post header .byline {
-  color: #666;
+  color: rgb(88, 88, 88);
   display: flex;
+  align-items: center;
   gap: 0.8rem;
+}
+.byline small {
+  background-color: rgb(88, 88, 88);
+  color: white;
+  border-radius: 3px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .post h1 {
   margin: 0;
