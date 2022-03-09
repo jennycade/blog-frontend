@@ -17,6 +17,7 @@ import Posts from './routes/posts'
 function App() {
   // state
   const [token, setToken] = useState('');
+  const [user, setUser] = useState({});
 
   // routing
   const navigate = useNavigate();
@@ -49,6 +50,16 @@ function App() {
     localStorage.removeItem('token');
     setToken('');
   }
+  const getHeaders = () => {
+    const result = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    if (token !== '') {
+      result.set('Authorization', `Bearer ${token}`);
+    }
+    return result;
+  }
 
   const handleSigninSubmit = async (username, password) => {
     // send post to server
@@ -56,15 +67,13 @@ function App() {
       `${process.env.REACT_APP_BACKEND_URI}/login`,
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: getHeaders(),
         body: JSON.stringify({ username, password })
       }
     ).then(response => handleResponse(response))
     .then(data => {
       saveToken(data.token);
+      setUser(data.user);
       // redirect
       navigate(`/`);
     })
@@ -78,11 +87,7 @@ function App() {
   const getPosts = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URI}/posts`,
-      {
-        headers: {
-          'Authorization': `Bearer: ${token}`
-        }
-      }
+      { headers: getHeaders(), }
     )
     if (!response.ok) {
       const err = new Error(response.error);
@@ -98,11 +103,19 @@ function App() {
       <menu>
         <Link to="/">All posts</Link>
         { !!token ?
-          <button onClick={destroyToken}>
-            Sign out
-          </button>
+          <>
+            <p>Welcome {user.displayName}</p>
+            <button onClick={destroyToken}>
+              Sign out
+            </button>
+          </>
           :
-          <Link to='/signin'>Sign in</Link>
+          <>
+            <Link to='/signup'>Register</Link>
+            <p> or </p>
+            <Link to='/signin'>Sign in</Link>
+          </>
+          
         }
         
       </menu>
