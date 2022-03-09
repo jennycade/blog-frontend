@@ -7,12 +7,14 @@ import { useEffect, useState } from 'react';
 import {
   Routes, Route,
   Link,
+  Outlet,
   useNavigate,
 } from 'react-router-dom';
 
-// components
+// route components
 import SignIn from './routes/signin';
 import Posts from './routes/posts'
+import SinglePost from './routes/singlePost';
 
 function App() {
   // state
@@ -103,6 +105,21 @@ function App() {
     return json;
   }
 
+  // get one posts
+  const getPost = async (postId) => {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/posts/${postId}`,
+      { headers: getHeaders(), }
+    )
+    if (!response.ok) {
+      const err = new Error(response.error);
+      err.status = response.status;
+      throw err;
+    }
+    const json = await response.json();
+    return json;
+  }
+
   return (
     <div className="App">
       <menu>
@@ -133,6 +150,10 @@ function App() {
         } />
 
         <Route index element={<Posts getPosts={getPosts} />} />
+        <Route path='posts' element={<><Outlet /></> }>
+          <Route index element={<Posts getPosts={getPosts} /> } />
+          <Route path=':postId' element={<SinglePost getPost={getPost} />} />
+        </Route>
         
 
         <Route path='*' element={

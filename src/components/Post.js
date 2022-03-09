@@ -24,7 +24,7 @@ const Post = (props) => {
       <main>{post.text}</main>
       <footer>
         { commentsDisplay === 'count' &&
-          <p>NUMBER PLACEHOLDER comments</p>
+          <p>{post.comments.length} comments</p>
         }
         { commentsDisplay === 'full' &&
           <p>COMMENTS PLACEHOLDER</p>

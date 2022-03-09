@@ -1,5 +1,6 @@
 // react
 import { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 
 // components
 import Post from '../components/Post';
@@ -40,6 +41,7 @@ const Posts = (props) => {
       { posts.length === 0 &&
         <p>No posts to display</p>
       }
+      <Outlet />
     </main>
   );
 };
