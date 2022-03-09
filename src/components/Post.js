@@ -14,7 +14,7 @@ const Post = (props) => {
           <Time time={post.createdAt} />
           {
             post.postStatus === 'draft' &&
-            <small>draft</small>
+            <small className='badge draft-badge'>draft</small>
           }
         </div>
       </header>

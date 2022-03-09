@@ -33,12 +33,14 @@ article:last-child {
   align-items: center;
   gap: 0.8rem;
 }
-.byline small {
-  background-color: rgb(88, 88, 88);
-  color: white;
+.badge {
   border-radius: 3px;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+.draft-badge {
+  background-color: rgb(88, 88, 88);
+  color: white;
 }
 .post h1 {
   margin: 0;
