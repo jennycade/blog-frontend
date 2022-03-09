@@ -16,6 +16,7 @@ import SignIn from './routes/signin';
 import Posts from './routes/posts'
 import SinglePost from './routes/singlePost';
 import User from './components/User';
+import Register from './routes/register';
 
 function App() {
   // state
@@ -30,7 +31,7 @@ function App() {
     if (!response.ok) {
       const err = new Error(response.error);
       err.status = response.status;
-      throw err;
+      console.error(err);
     }
     return await response.json();
   }
@@ -89,6 +90,23 @@ function App() {
       // TODO: Catch sign in errors
       console.error(error);
     });
+  }
+  const handleRegisterSubmit = async (username, password, displayName) => {
+    // send post to server
+    try { 
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URI}/users`,
+        {
+          method: 'POST',
+          headers: getHeaders(),
+          body: JSON.stringify({ username, password, displayname: displayName, iscommenter: 'true' })
+        }
+      );
+      const data = await handleResponse(response);
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   // get all posts
@@ -149,7 +167,7 @@ function App() {
           </>
           :
           <>
-            <Link to='/signup'>Register</Link>
+            <Link to='/register'>Register</Link>
             <p> or </p>
             <Link to='/signin'>Sign in</Link>
           </>
@@ -159,9 +177,16 @@ function App() {
       </menu>
 
       <Routes>
+
+        {/* auth */}
         <Route path='signin' element={
           <SignIn
             handleSigninSubmit={handleSigninSubmit}
+          />
+        } />
+        <Route path='register' element={
+          <Register
+            handleRegisterSubmit={handleRegisterSubmit}
           />
         } />
 
