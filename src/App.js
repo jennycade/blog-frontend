@@ -17,23 +17,28 @@ import Posts from './routes/posts'
 import SinglePost from './routes/singlePost';
 import User from './components/User';
 import Register from './routes/register';
+import ErrorsList from './components/ErrorsList';
 
 function App() {
   // state
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
+  const [errors, setErrors] = useState([]);
 
   // routing
   const navigate = useNavigate();
 
   // error handling
-  const handleResponse = async (response) => {
+  const handleResponse = (response) => {
     if (!response.ok) {
       const err = new Error(response.error);
       err.status = response.status;
-      console.error(err);
+      throw(err);
     }
-    return await response.json();
+    return response;
+  }
+  const getErrors = () => {
+   return errors; 
   }
 
   // first load -> get token and user from localStorage
@@ -79,7 +84,8 @@ function App() {
         headers: getHeaders(),
         body: JSON.stringify({ username, password })
       }
-    ).then(response => handleResponse(response))
+    ).then(response => handleResponse(response)) // TODO: check this
+    .then(response => response.json())
     .then(data => {
       saveAuth(data.token, data.user);
       
@@ -88,7 +94,7 @@ function App() {
     })
     .catch( (error) => {
       // TODO: Catch sign in errors
-      console.error(error);
+      setErrors(error);
     });
   }
   const handleRegisterSubmit = async (username, password, displayName) => {
@@ -102,10 +108,13 @@ function App() {
           body: JSON.stringify({ username, password, displayname: displayName, iscommenter: 'true' })
         }
       );
-      const data = await handleResponse(response);
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      const data = await response.json();
       console.log(data);
     } catch (err) {
-      console.error(err);
+      setErrors(err);
     }
   }
 
@@ -175,6 +184,9 @@ function App() {
         }
         
       </menu>
+      { errors.length > 0 &&
+        <ErrorsList errors={errors} />
+      }
 
       <Routes>
 
@@ -182,11 +194,13 @@ function App() {
         <Route path='signin' element={
           <SignIn
             handleSigninSubmit={handleSigninSubmit}
+            getErrors={getErrors}
           />
         } />
         <Route path='register' element={
           <Register
             handleRegisterSubmit={handleRegisterSubmit}
+            getErrors={getErrors}
           />
         } />
 

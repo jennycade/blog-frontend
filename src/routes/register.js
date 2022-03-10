@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Register = (props) => {
-  const { handleRegisterSubmit } = props;
+  const { handleRegisterSubmit, getErrors } = props;
 
   // state
   const [username, setUsername] = useState('');
@@ -33,11 +33,17 @@ const Register = (props) => {
   return (
     <main>
       <h1>Register</h1>
-      { errors.length > 0 &&
+      { getErrors().length > 0 &&
         <div className='error'>
           Errors:
           <ul>
-            {errors.map(error => <li key={error}>{error}</li>)}
+            {getErrors().map(error => {
+              if (typeof error === 'string') {
+                <li key={error}>{error}</li>
+              } else {
+                <li>ERROR PLACEHOLDER</li>
+              }
+            })}
           </ul>
         </div>
       }
