@@ -22,7 +22,7 @@ const User = (props) => {
 
     fetchData()
       .catch(console.error);
-  })
+  }, [getUser, userId])
   return (
     <main>
       { Object.keys(user).length === 0 ?

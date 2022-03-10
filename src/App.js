@@ -94,7 +94,7 @@ function App() {
     })
     .catch( (error) => {
       // TODO: Catch sign in errors
-      setErrors(error);
+      setErrors({...errors, error});
     });
   }
   const handleRegisterSubmit = async (username, password, displayName) => {
@@ -114,7 +114,7 @@ function App() {
       const data = await response.json();
       console.log(data);
     } catch (err) {
-      setErrors(err);
+      setErrors({...errors, err});
     }
   }
 

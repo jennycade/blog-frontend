@@ -1,5 +1,6 @@
 // components
 import Time from './Time';
+import { Link } from 'react-router-dom';
 
 const Byline = (props) => {
   // props
@@ -7,7 +8,9 @@ const Byline = (props) => {
 
   return (
     <div className='byline'>
-      <a rel="author" href={`/users/${article.author._id}`}>{article.author.displayName}</a>
+      <Link rel="author" to={`/users/${article.author._id}`}>
+        {article.author.displayName}
+      </Link>
       <Time time={article.createdAt} />
       {
         props.children

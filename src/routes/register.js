@@ -39,9 +39,9 @@ const Register = (props) => {
           <ul>
             {getErrors().map(error => {
               if (typeof error === 'string') {
-                <li key={error}>{error}</li>
+                return <li key={error}>{error}</li>
               } else {
-                <li>ERROR PLACEHOLDER</li>
+                return <li>ERROR PLACEHOLDER</li>
               }
             })}
           </ul>
