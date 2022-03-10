@@ -118,6 +118,18 @@ function App() {
     }
   }
 
+  // post comment
+  const postComment = async (postId, text) => {
+    // TODO
+    console.log(text);
+  }
+
+  // update comment
+  // TODO
+
+  // delete comment
+  // TODO
+
   // get all posts
   const getPosts = async () => {
     const response = await fetch(
@@ -210,7 +222,13 @@ function App() {
         {/* posts */}
         <Route path='posts' element={<><Outlet /></> }>
           <Route index element={<Posts getPosts={getPosts} /> } />
-          <Route path=':postId' element={<SinglePost getPost={getPost} />} />
+          <Route path=':postId' element={
+            <SinglePost
+              getPost={getPost}
+              postComment={postComment}
+              isLoggedIn={token !== ''}
+            />
+          } />
         </Route>
         <Route path='users' element={<><Outlet /></>} >
           <Route path=':userId' element={<User getUser={getUser} />} />

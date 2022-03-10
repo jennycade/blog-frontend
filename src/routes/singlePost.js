@@ -7,7 +7,7 @@ import Loading from '../components/Loading';
 
 const SinglePost = (props) => {
   // props
-  const { getPost } = props;
+  const { getPost, isLoggedIn, postComment } = props;
 
   // param
   const { postId } = useParams();
@@ -30,7 +30,11 @@ const SinglePost = (props) => {
   return (
     <main>
       { Object.keys(post).length !== 0 ?
-        <Post post={post} commentsDisplay='full' />
+        <Post post={post}
+          commentsDisplay='full'
+          isLoggedIn={isLoggedIn}
+          postComment={postComment}
+        />
         :
         <Loading />
       }

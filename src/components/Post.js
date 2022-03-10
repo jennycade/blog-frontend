@@ -7,7 +7,7 @@ import CommentsSection from './CommentsSection';
 
 const Post = (props) => {
   // props
-  const { post, commentsDisplay } = props;
+  const { post, commentsDisplay, isLoggedIn, postComment } = props;
 
   return (
     <article className='post'>
@@ -26,7 +26,11 @@ const Post = (props) => {
           <p>{post.comments.length} comments</p>
         }
         { commentsDisplay === 'full' &&
-          <CommentsSection comments={post.comments} />
+          <CommentsSection
+            comments={post.comments}
+            isLoggedIn={isLoggedIn}
+            postComment={async (text) => await postComment(post._id, text)}
+          />
         }
       </footer>
     </article>
