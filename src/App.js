@@ -177,9 +177,10 @@ function App() {
 
   return (
     <div className="App">
-      <menu>
+      <menu className={`mainNav${token === '' ? ' notSignedIn' : ''}`}>
         <Link to="/">All posts</Link>
-        { !!token ?
+        <div className='authWrapper'>
+          { !!token ?
           <>
             <Link to={`/users/${user._id}`}>{user.displayName}</Link>
             <button onClick={destroyAuthData}>
@@ -189,11 +190,10 @@ function App() {
           :
           <>
             <Link to='/register'>Register</Link>
-            <p> or </p>
             <Link to='/signin'>Sign in</Link>
           </>
-          
-        }
+          }
+        </div>
         
       </menu>
       { errors.length > 0 &&

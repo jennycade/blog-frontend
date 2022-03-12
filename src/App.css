@@ -1,26 +1,63 @@
 .App {
-  /* text-align: center; */
+  background-color: rgb(228, 235, 238);
+  min-height: 100vh;
 }
 
+/* HEADERS */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Yeseva One', cursive;
+}
+
+/* MENU */
 menu {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: baseline;
+  padding: 1rem;
+  margin: 0;
+
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.App main {
-  padding: 0 2rem;
+menu > .authWrapper {
+  display: flex;
+  gap: 1rem;
+}
+menu a {
+  text-decoration: none;
+}
+menu.notSignedIn {
+  position: sticky;
+  top: 0;
 }
 
-article {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+/* MAIN AREA */
 
-  text-align: left;
+main>h1 {
+  /* hero */
+  margin: 0;
+  padding: 2rem;
+  background-color: rgb(50, 50, 51);
+  color: white;
+}
 
-  border-bottom: 1px solid #ccc;
+/* POSTS */
+main.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+main.posts>h1 {
+  grid-column: 1 / -1;
+}
+
+main>article {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 1rem;
 
   display: grid;
-
   line-height: 1.8;
 }
 article:last-child {
@@ -57,4 +94,13 @@ article:last-child {
 }
 .post h1 {
   margin: 0;
+}
+
+
+
+@media (min-width: 500px) {
+  .mainNav, menu.notSignedIn {
+    position: sticky;
+    top: 0;
+  }
 }
