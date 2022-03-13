@@ -179,6 +179,7 @@ function App() {
     <div className="App">
       <menu className={`mainNav${token === '' ? ' notSignedIn' : ''}`}>
         <Link to="/">All posts</Link>
+        
         <div className='authWrapper'>
           { !!token ?
           <>
@@ -196,9 +197,11 @@ function App() {
         </div>
         
       </menu>
+
       { errors.length > 0 &&
         <ErrorsList errors={errors} />
       }
+
 
       <Routes>
 
@@ -239,6 +242,7 @@ function App() {
           <main><p>404 not found</p></main>
         } />
       </Routes>
+      
     </div>
   );
 }

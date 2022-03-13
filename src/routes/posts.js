@@ -29,20 +29,26 @@ const Posts = (props) => {
   return (
     <main className='posts'>
       <h1>All posts</h1>
-      { posts.length > 0 &&
-      posts.map(post => {
-        return (
-          <Post
-            key={post._id}
-            post={post}
-            commentsDisplay='count'
-          />
-        );
-      })}
-      { posts.length === 0 &&
-        <p>No posts to display</p>
-      }
-      <Outlet />
+
+      <div className='postsWrapper'>
+        { posts.length > 0 &&
+        posts.map(post => {
+          return (
+            <Post
+              key={post._id}
+              post={post}
+              commentsDisplay='count'
+            />
+          );
+        })}
+        { posts.length === 0 &&
+          <p>No posts to display</p>
+        }
+
+        <Outlet /> 
+        {/* for single post */}
+      </div>
+
     </main>
   );
 };

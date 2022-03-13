@@ -12,7 +12,8 @@ const Post = (props) => {
   return (
     <article className='post'>
       <header>
-        <Link to={`/posts/${post._id}`}><h1>{post.title}</h1></Link>
+        <h1><Link to={`/posts/${post._id}`}>{post.title}</Link></h1>
+        
         <Byline article={post}>
           {
             post.postStatus === 'draft' &&
@@ -20,7 +21,9 @@ const Post = (props) => {
           }
         </Byline>
       </header>
+      
       <main>{post.text}</main>
+
       <footer>
         { commentsDisplay === 'count' &&
           <p>{post.comments.length} comments</p>
