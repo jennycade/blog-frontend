@@ -27,6 +27,27 @@ a:focus {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Mono', monospace;
 }
+/* BADGES */
+.badge {
+  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+}
+.draft-badge {
+  background-color: rgb(88, 88, 88);
+  color: white;
+}
+.badge-role {
+  color: white;
+}
+.badge-role-admin {
+  background-color: rgb(100, 9, 9);
+}
+.badge-role-author {
+  background-color: rgb(194, 139, 19);
+}
+.badge-role-commenter {
+  background-color: rgb(3, 129, 187);
+}
 
 /* MENU */
 menu {
@@ -84,7 +105,7 @@ main.posts>h1 {
   line-height: 1.8;
 }
 
-
+/* POST */
 .byline {
   color: rgb(88, 88, 88);
   display: flex;
@@ -92,30 +113,11 @@ main.posts>h1 {
   flex-wrap: wrap;
   gap: 0.8rem;
 }
-
-/* POST */
-.badge {
-  border-radius: 3px;
-  padding: 0.2rem 0.5rem;
-}
-.draft-badge {
-  background-color: rgb(88, 88, 88);
-  color: white;
-}
-.badge-role {
-  color: white;
-}
-.badge-role-admin {
-  background-color: rgb(100, 9, 9);
-}
-.badge-role-author {
-  background-color: rgb(194, 139, 19);
-}
-.badge-role-commenter {
-  background-color: rgb(3, 129, 187);
-}
 .post h1 {
   margin: 0;
+}
+.post h1+.badge {
+  /* TODO: Position next to h1 */
 }
 .post main a {
   text-decoration: underline;
@@ -141,6 +143,12 @@ main.posts>h1 {
 .postsWrapper .post>footer>p {
   margin: 0.8rem 1rem;
   font-size: 0.8rem;
+}
+.postsWrapper .post .byline {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 0;
 }
 
 /* LARGER SCREENS */

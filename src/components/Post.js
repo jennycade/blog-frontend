@@ -13,12 +13,13 @@ const Post = (props) => {
     <article className='post'>
       <header>
         <h1><Link to={`/posts/${post._id}`}>{post.title}</Link></h1>
+        {
+          post.postStatus === 'draft' &&
+          <small className='badge draft-badge'>draft</small>
+        }
         
         <Byline article={post}>
-          {
-            post.postStatus === 'draft' &&
-            <small className='badge draft-badge'>draft</small>
-          }
+          
         </Byline>
       </header>
       
