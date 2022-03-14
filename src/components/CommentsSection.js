@@ -33,24 +33,33 @@ const CommentsSection = (props) => {
   return (
     <section className='comments'>
       <h1>Comments</h1>
-      { isLoggedIn &&
-        <button onClick={() => setShowCommentBox(!showCommentBox)} >
-          { showCommentBox ?
-            'Hide comment box' :
-            'Add comment'
-          }
-        </button>
-      }
 
-      { showCommentBox && isLoggedIn &&
-        <form onSubmit={handleSubmit}>
-          <textarea
-            onChange={(e) => setText(e.target.value)}
-            value={text}
-          />
-          <button type='submit'>Submit</button>
-        </form>
-      }
+      <section class='addComment'>
+        
+        { isLoggedIn &&
+          <button
+            className='outline'
+            onClick={() => setShowCommentBox(!showCommentBox)} >
+            { showCommentBox ?
+              'Hide comment box' :
+              'Add comment'
+            }
+          </button>
+        }
+        { showCommentBox && isLoggedIn &&
+          <form onSubmit={handleSubmit}>
+            <textarea
+              onChange={(e) => setText(e.target.value)}
+              value={text}
+            />
+            <button type='submit'>Submit</button>
+          </form>
+        }
+
+        { !isLoggedIn &&
+          <p>Log in to add a comment.</p>
+        }
+      </section>
 
       {comments.map((comment) => {
         return (
