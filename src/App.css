@@ -74,12 +74,16 @@ menu.notSignedIn {
 
 /* MAIN AREA */
 
-main>h1 {
-  /* hero */
-  margin: 0;
-  padding: 2rem;
+.hero {
+  width: 100%;
   background-color: rgb(50, 50, 51);
   color: white;
+}
+.hero>h1 {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
 }
 
 /* POSTS */
@@ -157,7 +161,7 @@ main.posts>h1 {
     position: sticky;
     top: 0;
   }
-  .postsWrapper {
+  .postsWrapper, .hero>h1 {
     padding-left: 2rem;
     padding-right: 2rem;
   }

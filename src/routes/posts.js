@@ -28,7 +28,9 @@ const Posts = (props) => {
 
   return (
     <main className='posts'>
-      <h1>All posts</h1>
+      <div className='hero'>
+        <h1>All posts</h1>
+      </div>
 
       <div className='postsWrapper'>
         { posts.length > 0 &&
