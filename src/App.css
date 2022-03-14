@@ -79,7 +79,7 @@ menu.notSignedIn {
   background-color: rgb(50, 50, 51);
   color: white;
 }
-.hero>h1 {
+.hero .pageTitle {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 1rem;
@@ -120,8 +120,12 @@ main.posts>h1 {
 .post h1 {
   margin: 0;
 }
-.post h1+.badge {
-  /* TODO: Position next to h1 */
+.postTitle {
+  display: flex;
+  align-items: baseline;
+}
+h1+.badge {
+  margin: 1rem;
 }
 .post main a {
   text-decoration: underline;
@@ -155,13 +159,23 @@ main.posts>h1 {
   gap: 0;
 }
 
+/* SINGLE POST */
+.singlePostWrapper {
+  max-width: 1000px;
+  margin: 1rem auto 0 auto;
+  padding-bottom: 1rem;
+}
+.hero .postTitle {
+  align-items: center;
+}
+
 /* LARGER SCREENS */
 @media (min-width: 500px) {
   .mainNav, menu.notSignedIn {
     position: sticky;
     top: 0;
   }
-  .postsWrapper, .hero>h1 {
+  .postsWrapper, .singlePostWrapper, .hero .pageTitle {
     padding-left: 2rem;
     padding-right: 2rem;
   }

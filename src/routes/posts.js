@@ -28,9 +28,9 @@ const Posts = (props) => {
 
   return (
     <main className='posts'>
-      <div className='hero'>
-        <h1>All posts</h1>
-      </div>
+      <header className='hero'>
+        <h1 className='pageTitle'>All posts</h1>
+      </header>
 
       <div className='postsWrapper'>
         { posts.length > 0 &&
@@ -39,7 +39,7 @@ const Posts = (props) => {
             <Post
               key={post._id}
               post={post}
-              commentsDisplay='count'
+              displayType='mini'
             />
           );
         })}

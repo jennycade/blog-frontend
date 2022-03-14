@@ -28,17 +28,16 @@ const SinglePost = (props) => {
   }, [getPost, postId]);
 
   return (
-    <main>
+    <main className='singlePost'>
       { Object.keys(post).length !== 0 ?
         <Post post={post}
-          commentsDisplay='full'
           isLoggedIn={isLoggedIn}
           postComment={postComment}
+          displayType='full'
         />
         :
         <Loading />
       }
-      {/* TODO: add loading indicator */}
     </main>
   );
 };

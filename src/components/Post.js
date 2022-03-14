@@ -7,38 +7,59 @@ import CommentsSection from './CommentsSection';
 
 const Post = (props) => {
   // props
-  const { post, commentsDisplay, isLoggedIn, postComment } = props;
+  const { post, isLoggedIn, postComment, displayType } = props;
 
-  return (
-    <article className='post'>
-      <header>
-        <h1><Link to={`/posts/${post._id}`}>{post.title}</Link></h1>
-        {
-          post.postStatus === 'draft' &&
-          <small className='badge draft-badge'>draft</small>
-        }
+  if (displayType==='mini') {
+    return (
+      <article className='post'>
+        <header>
+          <div className='postTitle'>
+            <h1><Link to={`/posts/${post._id}`}>{post.title}</Link></h1>
+            {
+              post.postStatus === 'draft' &&
+              <small className='badge draft-badge'>draft</small>
+            }
+          </div>
+          <Byline article={post} />
+        </header>
         
-        <Byline article={post}>
-          
-        </Byline>
-      </header>
-      
-      <main>{post.text}</main>
-
-      <footer>
-        { commentsDisplay === 'count' &&
+        <main>{post.text}</main>
+  
+        <footer>
           <p>{post.comments.length} comments</p>
-        }
-        { commentsDisplay === 'full' &&
-          <CommentsSection
-            comments={post.comments}
-            isLoggedIn={isLoggedIn}
-            postComment={async (text) => await postComment(post._id, text)}
-          />
-        }
-      </footer>
-    </article>
-  );
+        </footer>
+      </article>
+    );
+  } else if (displayType === 'full') {
+    // single page
+    return (
+      <>
+        <header className='hero'>
+          <div className='postTitle pageTitle'>
+            <h1>{post.title}</h1>
+            {
+              post.postStatus === 'draft' &&
+              <small className='badge draft-badge'>draft</small>
+            }
+          </div>
+          
+        </header>
+
+        <div class="singlePostWrapper">
+          <Byline article={post} />
+          <main>{post.text}</main>
+          <footer>
+            <CommentsSection
+              comments={post.comments}
+              isLoggedIn={isLoggedIn}
+              postComment={async (text) => await postComment(post._id, text)}
+            />
+          </footer>
+        </div>
+      </>
+    );
+  }
+  
 }
 
 export default Post;
