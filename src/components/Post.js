@@ -47,7 +47,7 @@ const Post = (props) => {
 
         <div class="singlePostWrapper">
           <Byline article={post} />
-          <main>{post.text}</main>
+          <p>{post.text}</p>
           <footer>
             <CommentsSection
               comments={post.comments}
