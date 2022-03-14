@@ -48,7 +48,7 @@ const CommentsSection = (props) => {
             onChange={(e) => setText(e.target.value)}
             value={text}
           />
-          <input type='submit' />
+          <button type='submit'>Submit</button>
         </form>
       }
 

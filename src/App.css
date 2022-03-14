@@ -27,6 +27,22 @@ a:focus {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Mono', monospace;
 }
+
+/* BUTTONS */
+button, .button {
+  color: white;
+  background-color: rgb(100, 9, 9);
+  font-weight: bold;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgb(172, 28, 28);
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+button:hover, .button:hover {
+  background-color: rgb(172, 28, 28);
+  /* border-color: rgb(100, 9, 9); */
+}
+
 /* BADGES */
 .badge {
   border-radius: 3px;
@@ -63,6 +79,7 @@ menu {
 menu > .authWrapper {
   display: flex;
   gap: 1rem;
+  align-items: baseline;
 }
 menu a {
   text-decoration: none;
