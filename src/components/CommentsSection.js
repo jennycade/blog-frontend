@@ -34,7 +34,7 @@ const CommentsSection = (props) => {
     <section className='comments'>
       <h1>Comments</h1>
 
-      <section class='addComment'>
+      <section className='addComment'>
         
         { isLoggedIn &&
           <button

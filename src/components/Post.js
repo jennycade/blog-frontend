@@ -45,7 +45,7 @@ const Post = (props) => {
           
         </header>
 
-        <div class="singlePostWrapper">
+        <div className="singlePostWrapper">
           <Byline article={post} />
           <p>{post.text}</p>
           <footer>
