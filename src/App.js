@@ -94,7 +94,7 @@ function App() {
     })
     .catch( (error) => {
       // TODO: Catch sign in errors
-      setErrors({...errors, error});
+      setErrors([...errors, error]);
     });
   }
   const handleRegisterSubmit = async (username, password, displayName) => {
@@ -114,7 +114,7 @@ function App() {
       const data = await response.json();
       console.log(data);
     } catch (err) {
-      setErrors({...errors, err});
+      setErrors([...errors, err]);
     }
   }
 
@@ -198,11 +198,6 @@ function App() {
         
       </menu>
 
-      { errors.length > 0 &&
-        <ErrorsList errors={errors} />
-      }
-
-
       <Routes>
 
         {/* auth */}
@@ -210,13 +205,17 @@ function App() {
           <SignIn
             handleSigninSubmit={handleSigninSubmit}
             getErrors={getErrors}
-          />
+          >
+            <ErrorsList errors={errors} />
+          </SignIn>
         } />
         <Route path='register' element={
           <Register
             handleRegisterSubmit={handleRegisterSubmit}
             getErrors={getErrors}
-          />
+          >
+            <ErrorsList errors={errors} />
+          </Register>
         } />
 
         {/* index - posts */}
