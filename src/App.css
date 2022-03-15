@@ -56,6 +56,12 @@ button.outline, .button.outline {
   border-radius: 3px;
   padding: 0.2rem 0.5rem;
 }
+.multiBadge {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
 .draft-badge {
   background-color: rgb(88, 88, 88);
   color: white;
@@ -213,18 +219,6 @@ textarea {
 }
 
 
-/* LARGER SCREENS */
-@media (min-width: 500px) {
-  .mainNav, menu.notSignedIn {
-    position: sticky;
-    top: 0;
-  }
-  .postsWrapper, .singlePageWrapper, .hero .pageTitle {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
 /* FORMS */
 form {
   margin-top: 2rem;
@@ -240,4 +234,25 @@ form input {
   border: 1px solid black;
   border-radius: 3px;
   padding: 0.5rem;
+}
+
+/* DL (for user pages) */
+dl {
+  display: grid;
+  grid-template-columns: min-content minmax(min-content, 1fr);
+}
+dt {
+  margin-bottom: 2rem;
+}
+
+/* LARGER SCREENS */
+@media (min-width: 500px) {
+  .mainNav, menu.notSignedIn {
+    position: sticky;
+    top: 0;
+  }
+  .postsWrapper, .singlePageWrapper, .hero .pageTitle {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

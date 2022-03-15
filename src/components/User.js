@@ -24,42 +24,51 @@ const User = (props) => {
       .catch(console.error);
   }, [getUser, userId])
   return (
-    <main>
+    <main className='singlePage'>
       { Object.keys(user).length === 0 ?
         <Loading />
         :
         <>
-          <h1>{user.displayName}</h1>
-          <dl>
-            { user.username &&
-              <>
-                <dt>Usename</dt>
-                <dd>{user.username}</dd>
-              </>
-            }
-            
-            
-            <dt>Roles</dt>
-            <dd>
-              { user.roles.map((role) => (
-                <small key={role}
-                  className={`badge badge-role badge-role-${role}`}
-                >
-                  {role}
-                </small>
-              ))}
-            </dd>
+          <header className='hero'>
+            <div className='pageTitle'>
+              <h1>{user.displayName}</h1>
+            </div>
+          </header>
+          
+          <div className='singlePageWrapper'>
+            <dl>
+              { user.username &&
+                <>
+                  <dt>Usename</dt>
+                  <dd>{user.username}</dd>
+                </>
+              }
+              
+              
+              <dt>Roles</dt>
+              <dd>
+                <div className='multiBadge'>
+                  { user.roles.map((role) => (
+                    <small key={role}
+                      className={`badge badge-role badge-role-${role}`}
+                    >
+                      {role}
+                    </small>
+                  ))}
+                </div>
+              </dd>
 
-            <dt>Joined</dt>
-            <dd><Time time={user.createdAt} /></dd>
-            
-            { user.updatedAt &&
-              <>
-                <dt>Profile updated</dt>
-                <dd><Time time={user.updatedAt} /></dd>
-              </>
-            }
-          </dl>
+              <dt>Joined</dt>
+              <dd><Time time={user.createdAt} /></dd>
+              
+              { user.updatedAt &&
+                <>
+                  <dt>Profile updated</dt>
+                  <dd><Time time={user.updatedAt} /></dd>
+                </>
+              }
+            </dl>
+          </div>
         </>
       }
       
