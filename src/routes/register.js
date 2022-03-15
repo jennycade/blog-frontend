@@ -31,58 +31,65 @@ const Register = (props) => {
   }
 
   return (
-    <main>
-      <h1>Register</h1>
-      { getErrors().length > 0 &&
-        <div className='error'>
-          Errors:
-          <ul>
-            {getErrors().map(error => {
-              if (typeof error === 'string') {
-                return <li key={error}>{error}</li>
-              } else {
-                return <li>ERROR PLACEHOLDER</li>
-              }
-            })}
-          </ul>
+    <main className='singlePage'>
+      <header className='hero'>
+        <div className='pageTitle'>
+          <h1>Register</h1>
         </div>
-      }
-      <form onSubmit={submitForm} >
-        <label htmlFor='username'>Email or username (private)</label>
-        <input type='text'
-          required
-          id='username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      </header>
+      
+      <div className='singlePageWrapper'>
+        { getErrors().length > 0 &&
+          <div className='error'>
+            Errors:
+            <ul>
+              {getErrors().map(error => {
+                if (typeof error === 'string') {
+                  return <li key={error}>{error}</li>
+                } else {
+                  return <li>ERROR PLACEHOLDER</li>
+                }
+              })}
+            </ul>
+          </div>
+        }
+        <form onSubmit={submitForm} >
+          <label htmlFor='username'>Email or username (private)</label>
+          <input type='text'
+            required
+            id='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-        <label htmlFor='password'>Password</label>
-        <input type='password'
-          required
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <label htmlFor='password'>Password</label>
+          <input type='password'
+            required
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <label htmlFor='password2'>Re-enter your password</label>
-        <input type='password'
-          required
-          id='password2'
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
-        />
+          <label htmlFor='password2'>Re-enter your password</label>
+          <input type='password'
+            required
+            id='password2'
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
+          />
 
-        <label htmlFor='displayName'>Display name (public)</label>
-        <input type='text'
-          required
-          id='displayName'
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
-        />
+          <label htmlFor='displayName'>Display name (public)</label>
+          <input type='text'
+            required
+            id='displayName'
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+          />
 
-        <input type='submit' />
-        
-      </form>
+          <button type='submit'>Register</button>
+          
+        </form>
+      </div>
     </main>
   );
 };

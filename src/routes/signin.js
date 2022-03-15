@@ -18,31 +18,38 @@ const SignIn = (props) => {
   }
 
   return (
-    <main>
-      <h1>Sign in</h1>
-      <form onSubmit={submitForm} >
+    <main className='singlePage'>
+      <header className='hero'>
+        <div className='pageTitle'>
+          <h1>Sign in</h1>
+        </div>
+      </header>
+      
+      <div className='singlePageWrapper'>
+        <form onSubmit={submitForm} >
 
-        <label htmlFor='username'>Email or username</label>
-        <input
-          type='text'
-          required
-          id='username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        ></input>
+          <label htmlFor='username'>Email or username</label>
+          <input
+            type='text'
+            required
+            id='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
 
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          required={true}
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            required={true}
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
 
-        <input type='submit'/>
+          <button type='submit'>Sign in</button>
 
-      </form>
+        </form>
+      </div>
     </main>
   );
 };

@@ -28,7 +28,7 @@ const SinglePost = (props) => {
   }, [getPost, postId]);
 
   return (
-    <main className='singlePost'>
+    <main className='singlePage'>
       { Object.keys(post).length !== 0 ?
         <Post post={post}
           isLoggedIn={isLoggedIn}
