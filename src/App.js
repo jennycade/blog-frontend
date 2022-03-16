@@ -85,6 +85,7 @@ function App() {
       
       // redirect
       navigate(`/`);
+      // TODO: navigate to previous page? At least sometimes?
     }
   }
 
@@ -117,8 +118,30 @@ function App() {
 
   // post comment
   const postComment = async (postId, text) => {
-    // TODO
-    console.log(text);
+    // TODO: if not logged in, show error message
+
+    // data to send
+    const commentData = {
+      text,
+    };
+
+    // fetch
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/posts/${postId}/comments`,
+      {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify(commentData),
+      }
+    );
+    const json = await response.json();
+    if (!response.ok) {
+      setErrors([json.error]);
+    } else {
+      setErrors([]);
+      setSuccessMessage('Comment posted');
+      // TODO: prompt post comments to re-render?
+    }
   }
 
   // update comment
@@ -204,6 +227,7 @@ function App() {
             handleSigninSubmit={handleSigninSubmit}
           >
             <ErrorsList errors={errors} />
+            <SuccessMessage successMessage={successMessage} />
           </SignIn>
         } />
         <Route path='register' element={
@@ -218,6 +242,7 @@ function App() {
         {/* index - posts */}
         <Route index element={<Posts getPosts={getPosts}>
             <ErrorsList errors={errors} />
+            <SuccessMessage successMessage={successMessage} />
           </Posts>}
         />
         
@@ -225,6 +250,7 @@ function App() {
         <Route path='posts' element={<><Outlet /></> }>
           <Route index element={<Posts getPosts={getPosts}>
               <ErrorsList errors={errors} />
+              <SuccessMessage successMessage={successMessage} />
             </Posts> }
           />
           <Route path=':postId' element={
@@ -234,6 +260,7 @@ function App() {
               isLoggedIn={token !== ''}
             >
               <ErrorsList errors={errors} />
+              <SuccessMessage successMessage={successMessage} />
             </SinglePost>
           } />
         </Route>
@@ -241,13 +268,15 @@ function App() {
           <Route path=':userId' element={
             <User getUser={getUser}>
               <ErrorsList errors={errors} />
+              <SuccessMessage successMessage={successMessage} />
             </User>}
           />
         </Route>
         
 
         <Route path='*' element={
-          <main><ErrorsList errors={['404 Not found']} /></main>
+          <main><ErrorsList errors={['404 Not found']} />
+          <SuccessMessage successMessage={successMessage} /></main>
         } />
       </Routes>
       

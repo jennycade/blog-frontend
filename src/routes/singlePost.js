@@ -29,14 +29,16 @@ const SinglePost = (props) => {
 
   return (
     <main className='singlePage'>
-      { props.children }
       
+
       { Object.keys(post).length !== 0 ?
         <Post post={post}
           isLoggedIn={isLoggedIn}
           postComment={postComment}
           displayType='full'
-        />
+        >
+          { props.children }
+        </Post>
         :
         <Loading />
       }
