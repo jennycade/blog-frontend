@@ -23,8 +23,8 @@ function App() {
   // state
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
-  const [errors, setErrors] = useState([]);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [errors, setErrors] = useState([]); // TODO: unset errors appropriately
+  const [successMessage, setSuccessMessage] = useState(''); // e.g. "You have successfully registered"
 
   // routing
   const navigate = useNavigate();
@@ -212,26 +212,38 @@ function App() {
         } />
 
         {/* index - posts */}
-        <Route index element={<Posts getPosts={getPosts} />} />
+        <Route index element={<Posts getPosts={getPosts}>
+            <ErrorsList errors={errors} />
+          </Posts>}
+        />
         
         {/* posts */}
         <Route path='posts' element={<><Outlet /></> }>
-          <Route index element={<Posts getPosts={getPosts} /> } />
+          <Route index element={<Posts getPosts={getPosts}>
+              <ErrorsList errors={errors} />
+            </Posts> }
+          />
           <Route path=':postId' element={
             <SinglePost
               getPost={getPost}
               postComment={postComment}
               isLoggedIn={token !== ''}
-            />
+            >
+              <ErrorsList errors={errors} />
+            </SinglePost>
           } />
         </Route>
         <Route path='users' element={<><Outlet /></>} >
-          <Route path=':userId' element={<User getUser={getUser} />} />
+          <Route path=':userId' element={
+            <User getUser={getUser}>
+              <ErrorsList errors={errors} />
+            </User>}
+          />
         </Route>
         
 
         <Route path='*' element={
-          <main><p>404 not found</p></main>
+          <main><ErrorsList errors={['404 Not found']} /></main>
         } />
       </Routes>
       

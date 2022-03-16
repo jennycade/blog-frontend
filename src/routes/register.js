@@ -39,6 +39,8 @@ const Register = (props) => {
       </header>
       
       <div className='singlePageWrapper'>
+
+        { props.children }
         
         <form onSubmit={submitForm} >
           <label htmlFor='username'>Email or username (private)</label>

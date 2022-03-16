@@ -33,6 +33,9 @@ const Posts = (props) => {
       </header>
 
       <div className='postsWrapper'>
+
+        { props.children }
+        
         { posts.length > 0 &&
         posts.map(post => {
           return (
