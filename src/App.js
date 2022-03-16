@@ -76,27 +76,28 @@ function App() {
   }
 
   const handleSigninSubmit = async (username, password) => {
-    // send post to server
-    fetch(
+    // TODO: wrap in try/catch block?
+    const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URI}/login`,
       {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify({ username, password })
       }
-    ).then(response => handleResponse(response)) // TODO: check this
-    .then(response => response.json())
-    .then(data => {
-      saveAuth(data.token, data.user);
+    );
+    const json = await response.json();
+    
+    // errors?
+    if (!response.ok) {
+      setErrors([json.error]);
+    } else {
+      saveAuth(json.token, json.user);
       
       // redirect
       navigate(`/`);
-    })
-    .catch( (error) => {
-      // TODO: Catch sign in errors
-      setErrors([...errors, error]);
-    });
+    }
   }
+  
   const handleRegisterSubmit = async (username, password, displayName) => {
     // send post to server
     try { 
