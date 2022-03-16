@@ -24,22 +24,10 @@ function App() {
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
   const [errors, setErrors] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
 
   // routing
   const navigate = useNavigate();
-
-  // error handling
-  const handleResponse = (response) => {
-    if (!response.ok) {
-      const err = new Error(response.error);
-      err.status = response.status;
-      throw(err);
-    }
-    return response;
-  }
-  const getErrors = () => {
-   return errors; 
-  }
 
   // first load -> get token and user from localStorage
   useEffect(() => {
@@ -91,32 +79,37 @@ function App() {
     if (!response.ok) {
       setErrors([json.error]);
     } else {
+      setErrors([]);
       saveAuth(json.token, json.user);
       
       // redirect
       navigate(`/`);
     }
   }
-  
+
   const handleRegisterSubmit = async (username, password, displayName) => {
-    // send post to server
-    try { 
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URI}/users`,
-        {
-          method: 'POST',
-          headers: getHeaders(),
-          body: JSON.stringify({ username, password, displayname: displayName, iscommenter: 'true' })
-        }
-      );
-      if (!response.ok) {
-        throw new Error(response.status);
+
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URI}/users`,
+      {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({ username, password, displayname: displayName, iscommenter: 'true' })
       }
-      const data = await response.json();
-      console.log(data);
-    } catch (err) {
-      setErrors([...errors, err]);
+    );
+    const json = await response.json();
+    
+    if (!response.ok) {
+      setErrors([json.error]);
+      // TODO: Split list of validation errors e.g.
+      // "Validation errors: Username required, Password required, Display name required"
+    } else {
+      setErrors([]);
+      // TODO: Display "successfully registered"
+      // TODO: Redirect (with timeout) to log in screen
+
     }
+
   }
 
   // post comment
@@ -148,6 +141,7 @@ function App() {
 
   // get one posts
   const getPost = async (postId) => {
+    // TODO: Handle error (e.g. not authorized -> display message and redirect)
     const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URI}/posts/${postId}`,
       { headers: getHeaders(), }
@@ -205,7 +199,6 @@ function App() {
         <Route path='signin' element={
           <SignIn
             handleSigninSubmit={handleSigninSubmit}
-            getErrors={getErrors}
           >
             <ErrorsList errors={errors} />
           </SignIn>
@@ -213,7 +206,6 @@ function App() {
         <Route path='register' element={
           <Register
             handleRegisterSubmit={handleRegisterSubmit}
-            getErrors={getErrors}
           >
             <ErrorsList errors={errors} />
           </Register>

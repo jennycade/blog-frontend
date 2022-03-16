@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Register = (props) => {
-  const { handleRegisterSubmit, getErrors } = props;
+  const { handleRegisterSubmit } = props;
 
   // state
   const [username, setUsername] = useState('');
@@ -39,20 +39,7 @@ const Register = (props) => {
       </header>
       
       <div className='singlePageWrapper'>
-        { getErrors().length > 0 &&
-          <div className='error'>
-            Errors:
-            <ul>
-              {getErrors().map(error => {
-                if (typeof error === 'string') {
-                  return <li key={error}>{error}</li>
-                } else {
-                  return <li>ERROR PLACEHOLDER</li>
-                }
-              })}
-            </ul>
-          </div>
-        }
+        
         <form onSubmit={submitForm} >
           <label htmlFor='username'>Email or username (private)</label>
           <input type='text'
