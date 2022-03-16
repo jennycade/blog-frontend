@@ -18,6 +18,7 @@ import SinglePost from './routes/singlePost';
 import User from './components/User';
 import Register from './routes/register';
 import ErrorsList from './components/ErrorsList';
+import SuccessMessage from './components/SuccessMessage';
 
 function App() {
   // state
@@ -105,8 +106,10 @@ function App() {
       // "Validation errors: Username required, Password required, Display name required"
     } else {
       setErrors([]);
-      // TODO: Display "successfully registered"
-      // TODO: Redirect (with timeout) to log in screen
+
+      setSuccessMessage('You have successfully registered. Sign in with your new username and password.');
+
+      // TODO: navigate to /signin with timeout
 
     }
 
@@ -208,6 +211,7 @@ function App() {
             handleRegisterSubmit={handleRegisterSubmit}
           >
             <ErrorsList errors={errors} />
+            <SuccessMessage successMessage={successMessage} />
           </Register>
         } />
 

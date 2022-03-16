@@ -80,12 +80,22 @@ button.outline, .button.outline {
 }
 
 /* ERROR */
-.error {
-  background-color: rgb(240, 205, 205);
-  border: 1px solid rgb(228, 68, 68);
+.error, .success {
   border-radius: 3px;
   padding: 1rem;
 }
+
+.error {
+  background-color: rgb(240, 205, 205);
+  border: 1px solid rgb(228, 68, 68);
+}
+
+/* SUCCESS */
+.success {
+  background-color: rgb(208, 240, 205);
+  border: 1px solid rgb(81, 228, 68);
+}
+
 
 /* MENU */
 menu {
