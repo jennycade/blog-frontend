@@ -30,6 +30,8 @@ function App() {
   // routing
   const navigate = useNavigate();
 
+  // AUTH
+
   // first load -> get token and user from localStorage
   useEffect(() => {
     const localToken = localStorage.getItem('token');
@@ -111,44 +113,75 @@ function App() {
       setSuccessMessage('You have successfully registered. Sign in with your new username and password.');
 
       // TODO: navigate to /signin with timeout
-
     }
-
   }
+
+  // COMMENTS
 
   // post comment
   const postComment = async (postId, text) => {
-    // TODO: if not logged in, show error message
-
-    // data to send
-    const commentData = {
-      text,
-    };
-
-    // fetch
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URI}/posts/${postId}/comments`,
-      {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify(commentData),
-      }
-    );
-    const json = await response.json();
-    if (!response.ok) {
-      setErrors([json.error]);
+    if (token === '') { // not logged in
+      setErrors(['You must be logged in to post a comment']);
     } else {
-      setErrors([]);
-      setSuccessMessage('Comment posted');
-      // TODO: prompt post comments to re-render?
+      // data to send
+      const commentData = {
+        text,
+      };
+
+      // fetch
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URI}/posts/${postId}/comments`,
+        {
+          method: 'POST',
+          headers: getHeaders(),
+          body: JSON.stringify(commentData),
+        }
+      );
+      const json = await response.json();
+      if (!response.ok) {
+        setErrors([json.error]);
+      } else {
+        setErrors([]);
+        setSuccessMessage('Comment posted');
+        // TODO: prompt post comments to re-render?
+      }
     }
   }
 
   // update comment
-  // TODO
+  const updateComment = async (commentId, text) => {
+    if (token === '') { // not logged in
+      setErrors(['You are not logged in']);
+    } else {
+      // data to send
+      const commentData = {
+        text,
+      };
+
+      // fetch
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URI}/comments/${commentId}`,
+        {
+          method: 'PUT',
+          headers: getHeaders(),
+          body: JSON.stringify(commentData),
+        }
+      );
+      const json = await response.json();
+      if (!response.ok) {
+        setErrors([json.error]);
+      } else {
+        setErrors([]);
+        setSuccessMessage('Comment updated');
+        // TODO: prompt post comments to re-render?
+      }
+    }
+  }
 
   // delete comment
-  // TODO
+  const deleteComment = async (commentId) => {
+    console.log(`Delete comment`);
+  }
 
   // get all posts
   const getPosts = async () => {
@@ -257,7 +290,10 @@ function App() {
             <SinglePost
               getPost={getPost}
               postComment={postComment}
+              updateComment={updateComment}
+              deleteComment={deleteComment}
               isLoggedIn={token !== ''}
+              userId={user._id}
             >
               <ErrorsList errors={errors} />
               <SuccessMessage successMessage={successMessage} />

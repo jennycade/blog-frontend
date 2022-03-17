@@ -1,11 +1,14 @@
 import { useState } from 'react';
 
 // components
-import Byline from './Byline';
+import Comment from './Comment';
 
 const CommentsSection = (props) => {
   // props
-  const { comments, isLoggedIn, postComment } = props;
+  const { comments, 
+    isLoggedIn, userId,
+    postComment, updateComment, deleteComment 
+  } = props;
 
   // state
   const [showCommentBox, setShowCommentBox] = useState(false);
@@ -63,12 +66,12 @@ const CommentsSection = (props) => {
 
       {comments.map((comment) => {
         return (
-          <article key={comment._id}>
-            <Byline article={comment} />
-            <p>
-              {comment.text}
-            </p>
-          </article>
+          <Comment key={comment._id}
+            comment={comment}
+            userId={userId}
+            updateComment={updateComment}
+            deleteComment={deleteComment}
+          />
         );
       })}
     </section>

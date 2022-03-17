@@ -7,7 +7,11 @@ import Loading from '../components/Loading';
 
 const SinglePost = (props) => {
   // props
-  const { getPost, isLoggedIn, postComment } = props;
+  const {
+    getPost,
+    isLoggedIn, userId,
+    postComment, updateComment, deleteComment
+  } = props;
 
   // param
   const { postId } = useParams();
@@ -35,6 +39,9 @@ const SinglePost = (props) => {
         <Post post={post}
           isLoggedIn={isLoggedIn}
           postComment={postComment}
+          updateComment={updateComment}
+          deleteComment={deleteComment}
+          userId={userId}
           displayType='full'
         >
           { props.children }
