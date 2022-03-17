@@ -26,27 +26,19 @@ a:focus {
   color: white;
 }
 
-/* HIDDEN */
-/* TODO: disable for mobile */
-*>.hiddenUntilHovering {
-  display: none;
-}
-*:hover>.hiddenUntilHovering {
-  display: inherit;
-}
-
 /* HEADERS */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Mono', monospace;
 }
 
 /* MODAL */
+/* TODO: Center vertically when scrolled */
 .modalWrapper {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   background-color: rgba(0,0,0,0.2);
 }
@@ -314,5 +306,13 @@ dt {
   .postsWrapper, .singlePageWrapper, .hero .pageTitle {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  /* HIDDEN */
+  *>.hiddenUntilHovering {
+    display: none;
+  }
+  *:hover>.hiddenUntilHovering {
+    display: inherit;
   }
 }
