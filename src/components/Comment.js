@@ -15,6 +15,7 @@ const Comment = (props) => {
   // state
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(comment.text);
+  const [showDeleteWarning, setShowDeleteWarning] = useState(false);
 
   // functions
   const handleEditClick = (e) => {
@@ -27,11 +28,7 @@ const Comment = (props) => {
   const handleSubmitUpdate = async (e) => {
     e.currentTarget.blur();
     setEditing(false);
-    console.log('Editing comment');
-    console.log(comment);
     await updateComment(comment._id, text);
-    // FIX: postId not going through to API
-
   }
   const handleCancelClick = (e) => {
     e.currentTarget.blur();
@@ -42,12 +39,20 @@ const Comment = (props) => {
   }
   const handleDeleteClick = (e) => {
     e.currentTarget.blur();
-    // TODO
+    setShowDeleteWarning(true);
+  }
+  const handleDeleteConfirmClick = (e) => {
+    e.currentTarget.blur();
+    setShowDeleteWarning(false);
+    deleteComment(comment._id);
+  }
+  const handleDeleteCancelClick = (e) => {
+    e.currentTarget.blur();
+    setShowDeleteWarning(false);
   }
 
   // TODO
 
-  // click Edit comment -> show comment text in textbox, Update and Cancel buttons
   // click Delete comment -> verify delete -> delete
 
   return (
@@ -67,17 +72,31 @@ const Comment = (props) => {
             {comment.text}
           </p>
           { userId === comment.author._id &&
-            <div className='buttonSet hiddenUntilHovering'>
-              <button
-                onClick={handleEditClick}
-                className='outline'
-              >
-                Edit Comment
-              </button>
-              <button onClick={handleDeleteClick}>Delete Comment</button>
+            <div class='hiddenUntilHovering'>
+              <div className='buttonSet'>
+                <button
+                  onClick={handleEditClick}
+                  className='outline'
+                >
+                  Edit Comment
+                </button>
+                <button onClick={handleDeleteClick}>Delete Comment</button>
+              </div>
             </div>
           }
         </>
+      }
+
+      { showDeleteWarning &&
+        <div class='modalWrapper'>
+          <aside className='modal'>
+            <p>Are you sure you want to delete this comment? It cannot be undone.</p>
+            <div className='buttonSet'>
+              <button onClick={handleDeleteConfirmClick}>Delete</button>
+              <button className='outline' onClick={handleDeleteCancelClick}>Cancel</button>
+            </div>
+          </aside>
+        </div>
       }
       
       

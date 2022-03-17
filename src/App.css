@@ -31,12 +31,34 @@ a:focus {
   display: none;
 }
 *:hover>.hiddenUntilHovering {
-  display: block;
+  display: inherit;
 }
 
 /* HEADERS */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Mono', monospace;
+}
+
+/* MODAL */
+.modalWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0,0,0,0.2);
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+
+  background-color: white;
+  padding: 1rem;
+  border-radius: 5px;
 }
 
 /* BUTTONS */
@@ -62,6 +84,12 @@ button.outline:hover, .button.outline:hover, button.outline:focus, .button.outli
   color: white;
   background-color: rgb(172, 28, 28);
   border: 1px solid rgb(172, 28, 28);
+}
+
+.buttonSet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* BADGES */
