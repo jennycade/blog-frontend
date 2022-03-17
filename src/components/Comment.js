@@ -72,7 +72,7 @@ const Comment = (props) => {
             {comment.text}
           </p>
           { userId === comment.author._id &&
-            <div class='hiddenUntilHovering'>
+            <div className='hiddenUntilHovering'>
               <div className='buttonSet'>
                 <button
                   onClick={handleEditClick}
@@ -88,7 +88,7 @@ const Comment = (props) => {
       }
 
       { showDeleteWarning &&
-        <div class='modalWrapper'>
+        <div className='modalWrapper'>
           <aside className='modal'>
             <p>Are you sure you want to delete this comment? It cannot be undone.</p>
             <div className='buttonSet'>

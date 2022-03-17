@@ -173,14 +173,31 @@ function App() {
       } else {
         setErrors([]);
         setSuccessMessage('Comment updated');
-        // TODO: prompt post comments to re-render?
       }
     }
   }
 
   // delete comment
   const deleteComment = async (commentId) => {
-    console.log(`Delete comment`);
+    if (token === '') { // not logged in
+      setErrors(['You are not logged in']);
+    } else {
+      // fetch
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URI}/comments/${commentId}`,
+        {
+          method: 'DELETE',
+          headers: getHeaders(),
+        }
+      );
+      if (!response.ok) {
+        const json = await response.json();
+        setErrors([json.error]);
+      } else {
+        setErrors([]);
+        setSuccessMessage('Comment deleted');
+      }
+    }
   }
 
   // get all posts

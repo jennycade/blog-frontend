@@ -27,6 +27,7 @@ a:focus {
 }
 
 /* HIDDEN */
+/* TODO: disable for mobile */
 *>.hiddenUntilHovering {
   display: none;
 }
