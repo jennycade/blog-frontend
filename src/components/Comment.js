@@ -27,7 +27,9 @@ const Comment = (props) => {
   const handleSubmitUpdate = async (e) => {
     e.currentTarget.blur();
     setEditing(false);
-    await updateComment(text);
+    console.log('Editing comment');
+    console.log(comment);
+    await updateComment(comment._id, text);
     // FIX: postId not going through to API
 
   }

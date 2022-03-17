@@ -61,8 +61,8 @@ const Post = (props) => {
               isLoggedIn={isLoggedIn}
               userId={userId}
               postComment={async (text) => await postComment(post._id, text)}
-              updateComment={async (text) => await updateComment(post._id, text)}
-              deleteComment={async () => await deleteComment(post._id)}
+              updateComment={updateComment}
+              deleteComment={deleteComment}
             />
           </footer>
         </div>
