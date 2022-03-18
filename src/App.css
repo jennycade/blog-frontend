@@ -8,6 +8,8 @@ body {
 .App * {
   box-sizing: border-box;
 }
+
+/* LINKS */
 a {
   color: rgb(172, 28, 28);
   text-decoration: none;
@@ -30,6 +32,15 @@ a:focus {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Mono', monospace;
 }
+
+/* DIM */
+*>.dimUntilHovering {
+  opacity: 50%;
+}
+*:hover>.dimUntilHovering, *:focus>.dimUntilHovering, *:active>.dimUntilHovering {
+  opacity: 100%;
+}
+
 
 /* MODAL */
 /* TODO: Center vertically when scrolled */
@@ -269,6 +280,9 @@ textarea {
 .addComment {
   margin-bottom: 1rem;
 }
+.comments>article {
+  margin-top: 3rem;
+}
 
 
 /* FORMS */
@@ -306,13 +320,5 @@ dt {
   .postsWrapper, .singlePageWrapper, .hero .pageTitle {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-
-  /* HIDDEN */
-  *>.hiddenUntilHovering {
-    display: none;
-  }
-  *:hover>.hiddenUntilHovering {
-    display: inherit;
   }
 }

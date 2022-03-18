@@ -60,8 +60,10 @@ const Comment = (props) => {
       <Byline article={comment} />
       { editing ?
         <>
-          <textarea value={text}
+          <textarea
+            value={text}
             onChange={handleUpdateText}
+            autoFocus={true}
           />
           <button onClick={handleSubmitUpdate}>Update</button>
           <button onClick={handleCancelClick}>Cancel</button>
@@ -72,7 +74,7 @@ const Comment = (props) => {
             {comment.text}
           </p>
           { userId === comment.author._id &&
-            <div className='hiddenUntilHovering'>
+            <div className='dimUntilHovering'>
               <div className='buttonSet'>
                 <button
                   onClick={handleEditClick}

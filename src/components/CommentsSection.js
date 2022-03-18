@@ -54,6 +54,7 @@ const CommentsSection = (props) => {
             <textarea
               onChange={(e) => setText(e.target.value)}
               value={text}
+              autoFocus={true}
             />
             <button type='submit'>Submit</button>
           </form>

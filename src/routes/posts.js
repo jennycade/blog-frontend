@@ -1,6 +1,7 @@
 // react
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 // components
 import Post from '../components/Post';
@@ -11,6 +12,7 @@ const Posts = (props) => {
 
   // state
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // get posts on load
   useEffect(
@@ -18,6 +20,7 @@ const Posts = (props) => {
       const fetchData = async () => {
         const newPosts = await getPosts();
         setPosts(newPosts);
+        setLoading(false);
       }
       
       fetchData()
@@ -35,6 +38,10 @@ const Posts = (props) => {
       <div className='postsWrapper'>
 
         { props.children }
+
+        { loading && 
+          <Loading />
+        }
         
         { posts.length > 0 &&
         posts.map(post => {
@@ -46,7 +53,8 @@ const Posts = (props) => {
             />
           );
         })}
-        { posts.length === 0 &&
+        
+        { posts.length === 0 && !loading &&
           <p>No posts to display</p>
         }
 
