@@ -311,6 +311,14 @@ dt {
   margin-bottom: 2rem;
 }
 
+/* LOADING */
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* LARGER SCREENS */
 @media (min-width: 500px) {
   .mainNav, menu.notSignedIn {
