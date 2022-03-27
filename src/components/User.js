@@ -20,11 +20,12 @@ const User = (props) => {
       setUser(newUser);
     }
 
-    fetchData()
-      .catch(console.error);
-  }, [getUser, userId])
+    fetchData();
+  }, [userId]); // TODO: find a correct way to do this
   return (
     <main className='singlePage'>
+      { props.children }
+
       { Object.keys(user).length === 0 ?
         <Loading />
         :

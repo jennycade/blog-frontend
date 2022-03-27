@@ -206,29 +206,31 @@ function App() {
       `${process.env.REACT_APP_BACKEND_URI}/posts`,
       { headers: getHeaders(), }
     )
-    if (!response.ok) {
-      const err = new Error(response.error);
-      err.status = response.status;
-      throw err;
-    }
     const json = await response.json();
-    return json;
+    if (!response.ok) {
+      setErrors([json.error]);
+      return [];
+    } else {
+      setErrors([]);
+      return json;
+    }
   }
 
-  // get one posts
+  // get one post
   const getPost = async (postId) => {
     // TODO: Handle error (e.g. not authorized -> display message and redirect)
     const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URI}/posts/${postId}`,
       { headers: getHeaders(), }
-    )
-    if (!response.ok) {
-      const err = new Error(response.error);
-      err.status = response.status;
-      throw err;
-    }
+    );
     const json = await response.json();
-    return json;
+    if (!response.ok) {
+      setErrors([json.error]);
+      return {};
+    } else {
+      setErrors([]);
+      return json;
+    }
   }
 
   // get one user
@@ -236,14 +238,15 @@ function App() {
     const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URI}/users/${userId}`,
       { headers: getHeaders(), }
-    )
-    if (!response.ok) {
-      const err = new Error(response.error);
-      err.status = response.status;
-      throw err;
-    }
+    );
     const json = await response.json();
-    return json;
+    if (!response.ok) {
+      setErrors([json.error]);
+      return {};
+    } else {
+      setErrors([]);
+      return json;
+    }
   }
 
   return (
