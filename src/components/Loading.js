@@ -1,6 +1,9 @@
 const Loading = (props) => {
   return (
-    <p className='loading'>Loading...</p>
+    <>
+      { props.children }
+      <p className='loading'>Loading...</p>
+    </>
   );
 };
 
