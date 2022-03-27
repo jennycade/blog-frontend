@@ -191,7 +191,8 @@ menu.notSignedIn {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
 }
-main.posts>h1 {
+
+main.posts>h1, .postsWrapper>.error, .postsWrapper>.success {
   grid-column: 1 / -1;
 }
 
