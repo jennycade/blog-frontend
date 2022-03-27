@@ -86,7 +86,9 @@ function App() {
       setSuccessMessage('');
     } else {
       setErrors([]);
-      setSuccessMessage('Successfully signed in');
+      // setSuccessMessage('Successfully signed in');
+      setSuccessMessage('');
+      // don't bother showing a success message before redirecting.
       saveAuth(json.token, json.user);
       
       // redirect
