@@ -27,9 +27,8 @@ const SinglePost = (props) => {
       setPost(newPost);
     }
     // then call it
-    fetchData()
-      .catch(console.error);
-  }, [getPost, postId]);
+    fetchData();
+  }, [postId]);
 
   return (
     <main className='singlePage'>

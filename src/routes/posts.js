@@ -23,10 +23,9 @@ const Posts = (props) => {
         setLoading(false);
       }
       
-      fetchData()
-        .catch(console.error);
+      fetchData();
     },
-    [getPosts]
+    [] // TODO: find a correct way to do this
   );
 
   return (

@@ -54,6 +54,8 @@ function App() {
     localStorage.removeItem('user');
     setToken('');
     setUser({});
+    setErrors([]);
+    setSuccessMessage('Signed out');
   }
   const getHeaders = () => {
     const result = new Headers({
@@ -81,8 +83,10 @@ function App() {
     // errors?
     if (!response.ok) {
       setErrors([json.error]);
+      setSuccessMessage('');
     } else {
       setErrors([]);
+      setSuccessMessage('Successfully signed in');
       saveAuth(json.token, json.user);
       
       // redirect
@@ -107,6 +111,7 @@ function App() {
       setErrors([json.error]);
       // TODO: Split list of validation errors e.g.
       // "Validation errors: Username required, Password required, Display name required"
+      setSuccessMessage('');
     } else {
       setErrors([]);
 
@@ -122,6 +127,7 @@ function App() {
   const postComment = async (postId, text) => {
     if (token === '') { // not logged in
       setErrors(['You must be logged in to post a comment']);
+      setSuccessMessage('');
     } else {
       // data to send
       const commentData = {
@@ -140,6 +146,7 @@ function App() {
       const json = await response.json();
       if (!response.ok) {
         setErrors([json.error]);
+        setSuccessMessage('');
       } else {
         setErrors([]);
         setSuccessMessage('Comment posted');
@@ -152,6 +159,7 @@ function App() {
   const updateComment = async (commentId, text) => {
     if (token === '') { // not logged in
       setErrors(['You are not logged in']);
+      setSuccessMessage('');
     } else {
       // data to send
       const commentData = {
@@ -170,6 +178,7 @@ function App() {
       const json = await response.json();
       if (!response.ok) {
         setErrors([json.error]);
+        setSuccessMessage('');
       } else {
         setErrors([]);
         setSuccessMessage('Comment updated');
@@ -181,6 +190,7 @@ function App() {
   const deleteComment = async (commentId) => {
     if (token === '') { // not logged in
       setErrors(['You are not logged in']);
+      setSuccessMessage('');
     } else {
       // fetch
       const response = await fetch(
@@ -193,6 +203,7 @@ function App() {
       if (!response.ok) {
         const json = await response.json();
         setErrors([json.error]);
+        setSuccessMessage('');
       } else {
         setErrors([]);
         setSuccessMessage('Comment deleted');
@@ -209,9 +220,11 @@ function App() {
     const json = await response.json();
     if (!response.ok) {
       setErrors([json.error]);
+      setSuccessMessage('');
       return [];
     } else {
       setErrors([]);
+      setSuccessMessage('');
       return json;
     }
   }
@@ -226,9 +239,11 @@ function App() {
     const json = await response.json();
     if (!response.ok) {
       setErrors([json.error]);
+      setSuccessMessage('');
       return {};
     } else {
       setErrors([]);
+      setSuccessMessage('');
       return json;
     }
   }
@@ -242,9 +257,11 @@ function App() {
     const json = await response.json();
     if (!response.ok) {
       setErrors([json.error]);
+      setSuccessMessage('');
       return {};
     } else {
       setErrors([]);
+      setSuccessMessage('');
       return json;
     }
   }
