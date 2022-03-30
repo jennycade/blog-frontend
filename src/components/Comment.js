@@ -65,8 +65,10 @@ const Comment = (props) => {
             onChange={handleUpdateText}
             autoFocus={true}
           />
-          <button onClick={handleSubmitUpdate}>Update</button>
-          <button onClick={handleCancelClick}>Cancel</button>
+          <div className='buttonSet'>
+            <button onClick={handleSubmitUpdate}>Update</button>
+            <button className='outline' onClick={handleCancelClick}>Cancel</button>
+          </div>
         </>
         :
         <>
