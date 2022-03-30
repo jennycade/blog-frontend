@@ -19,13 +19,25 @@ const SinglePost = (props) => {
   // state
   const [post, setPost] = useState({});
   const [incrementToFetch, setIncrementToFetch] = useState(0);
+  const [hasError, setHasError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // getPost
   useEffect(() => {
     // define async function
     const fetchData = async () => {
+      setLoading(true);
       const newPost = await getPost(postId);
-      setPost(newPost);
+      if (Object.keys(newPost).length > 0) {
+        setPost(newPost);
+        setLoading(false);
+        // setHasError(false);
+      } else {
+        // error
+        setHasError(true);
+        setLoading(false);
+      }
+      
     }
     // then call it
     fetchData();
@@ -48,8 +60,20 @@ const SinglePost = (props) => {
   return (
     <main className='singlePage'>
       
+      { loading &&
+        <Loading> 
+          {/* TODO: Don't show loading when there's an error */}
+          { props.children }
+        </Loading>
+      }
 
-      { Object.keys(post).length !== 0 ?
+      { hasError &&
+        <>
+          { props.children }
+        </>
+      }
+
+      { !loading && !hasError &&
         <Post post={post}
           isLoggedIn={isLoggedIn}
           postComment={handlePostComment}
@@ -60,12 +84,8 @@ const SinglePost = (props) => {
         >
           { props.children }
         </Post>
-        :
-        <Loading> 
-          {/* TODO: Don't show loading when there's an error */}
-          { props.children }
-        </Loading>
       }
+
     </main>
   );
 };

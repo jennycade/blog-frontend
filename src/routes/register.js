@@ -41,6 +41,8 @@ const Register = (props) => {
       <div className='singlePageWrapper'>
 
         { props.children }
+
+        {/* TODO: hide form after submitting */}
         
         <form onSubmit={submitForm} >
           <label htmlFor='username'>Email or username (private)</label>
