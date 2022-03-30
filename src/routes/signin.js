@@ -6,7 +6,6 @@ import { useState } from 'react';
 const SignIn = (props) => {
   // props
   const { handleSigninSubmit } = props;
-  // TODO
 
   // state
   const [username, setUsername] = useState('');

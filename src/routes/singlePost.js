@@ -61,8 +61,7 @@ const SinglePost = (props) => {
     <main className='singlePage'>
       
       { loading &&
-        <Loading> 
-          {/* TODO: Don't show loading when there's an error */}
+        <Loading>
           { props.children }
         </Loading>
       }

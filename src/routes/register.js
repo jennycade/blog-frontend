@@ -42,7 +42,7 @@ const Register = (props) => {
 
         { props.children }
 
-        {/* TODO: hide form after submitting */}
+        {/* TODO: hide form after successful submit */}
         
         <form onSubmit={submitForm} >
           <label htmlFor='username'>Email or username (private)</label>

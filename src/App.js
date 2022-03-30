@@ -152,7 +152,6 @@ function App() {
       } else {
         setErrors([]);
         setSuccessMessage('Comment posted');
-        // TODO: prompt post comments to re-render?
       }
     }
   }

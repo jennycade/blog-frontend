@@ -51,10 +51,6 @@ const Comment = (props) => {
     setShowDeleteWarning(false);
   }
 
-  // TODO
-
-  // click Delete comment -> verify delete -> delete
-
   return (
     <article key={comment._id}>
       <Byline article={comment} />
