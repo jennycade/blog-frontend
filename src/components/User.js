@@ -12,12 +12,20 @@ const User = (props) => {
   const { userId } = useParams();
   // state
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   // first load -> get user
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const newUser = await getUser(userId);
-      setUser(newUser);
+      if (Object.keys(newUser).length > 0) {
+        setUser(newUser);
+      } else {
+        setError(true);
+      }
+      setLoading(false);
     }
 
     fetchData();
@@ -26,9 +34,15 @@ const User = (props) => {
     <main className='singlePage'>
       { props.children }
 
-      { Object.keys(user).length === 0 ?
+      { loading && !error &&
         <Loading />
-        :
+      }
+
+      { !loading && !error &&
+        <></>
+      }
+
+      { !loading && !error &&
         <>
           <header className='hero'>
             <div className='pageTitle'>
